@@ -14,18 +14,18 @@ import {
   TimeLogsUpdatePayload,
 } from './dtos/TimeLogsPayload.dto';
 import { TimeLogsResponse } from './dtos/TimeLogsResponse.dto';
-import { ACTIVITY_TYPE } from './enums/activity-type.enum';
+import { ActivityType } from './enums/activity-type.enum';
 import { IdParam } from 'src/lib/dtos';
 import { TimeLogsQuery } from './dtos/TimeLogsQuery.dto';
 
 const HARDCODED_TIME_LOG: TimeLogsResponse = {
   id: 1,
-  type: ACTIVITY_TYPE.WORK_ACTIVITY,
+  type: ActivityType.WORK_ACTIVITY,
   activity_id: 1,
   sub_activity_id: 1,
   user_id: 1,
   time: 8 * 60,
-  date: new Date(),
+  date: '2025-04-06',
 };
 
 @Controller('time-logs')

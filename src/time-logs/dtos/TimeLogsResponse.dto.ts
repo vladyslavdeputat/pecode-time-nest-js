@@ -1,4 +1,4 @@
-import { Expose, Type } from 'class-transformer';
+import { Expose } from 'class-transformer';
 import type { ActivityType } from '../enums/activity-type.enum';
 
 export class TimeLogsResponse {
@@ -21,6 +21,5 @@ export class TimeLogsResponse {
   time: number;
 
   @Expose()
-  @Type(() => Date)
-  date: Date;
+  date: string;
 }

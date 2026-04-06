@@ -1,18 +1,17 @@
 import {
-  IsDate,
-  IsIn,
   IsInt,
   IsNumber,
   IsOptional,
   Min,
   Max,
+  IsEnum,
+  IsDateString,
 } from 'class-validator';
-import { ACTIVITY_TYPE, type ActivityType } from '../enums/activity-type.enum';
-import { Type } from 'class-transformer';
-import { PartialType } from '@nestjs/swagger';
+import { ActivityType } from '../enums/activity-type.enum';
+import { OmitType, PartialType } from '@nestjs/swagger';
 
 export class TimeLogsPayload {
-  @IsIn(Object.values(ACTIVITY_TYPE))
+  @IsEnum(ActivityType)
   type: ActivityType;
 
   @IsOptional()
@@ -31,9 +30,10 @@ export class TimeLogsPayload {
   @Max(24 * 60)
   time: number;
 
-  @Type(() => Date)
-  @IsDate()
-  date: Date;
+  @IsDateString({ strict: true })
+  date: string;
 }
 
-export class TimeLogsUpdatePayload extends PartialType(TimeLogsPayload) {}
+export class TimeLogsUpdatePayload extends PartialType(
+  OmitType(TimeLogsPayload, ['user_id'] as const),
+) {}
